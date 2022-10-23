@@ -44,9 +44,9 @@ The total volume of unzipped dataset is quite huge (more than 15GB).
 
 ```sh
 cd Model/bert4eth;
-python gen_seq.py --phisher=True 
-                  --deanon=True 
-                  --mev=True 
+python gen_seq.py --phisher=True \
+                  --deanon=True \ 
+                  --mev=True \ 
                   --bizdate=xxx
                   
 python gen_seq_erc20.py;
@@ -78,33 +78,33 @@ The configuration file is "Model/bert4eth/bert_config_eth_64.json"
 [//]: # (&#40;Masking, I/O separation and ERC20 log&#41;)
 
 ```sh
-python gen_pretrain_data.py --bizdate=xxx 
-                            --max_seq_length=50
-                            --masked_lm_prob=0.8
-                            --max_predictions_per_seq=40
-                            --sliding_step=30
-                            --dupe_factor=10 
+python gen_pretrain_data.py --bizdate=xxx \
+                            --max_seq_length=50 \
+                            --masked_lm_prob=0.8 \
+                            --max_predictions_per_seq=40 \
+                            --sliding_step=30 \
+                            --dupe_factor=10 \
                             --do_eval=False
 ```
 
 #### Step 2: Pre-train BERT4ETH Model
 
 ```sh
-python run_pretrain.py --bizdate=xxx 
-                       --max_seq_length=50,
-                       --max_predictions_per_seq=40,
-                       --masked_lm_prob=0.8,
-                       --epoch=5
-                       --batch_size=256
-                       --learning_rate=1e-4
-                       --num_train_steps=1000000
-                       --num_warmup_steps=100,
-                       --save_checkpoints_steps=8000
-                       --neg_strategy=zip
-                       --neg_sample_num=5000
-                       --do_eval=False
-                       --checkpointDir=xxx
-                       --init_seed=1234
+python run_pretrain.py --bizdate=xxx \
+                       --max_seq_length=50 \
+                       --max_predictions_per_seq=40 \
+                       --masked_lm_prob=0.8 \
+                       --epoch=5 \
+                       --batch_size=256 \
+                       --learning_rate=1e-4 \
+                       --num_train_steps=1000000 \
+                       --num_warmup_steps=100 \
+                       --save_checkpoints_steps=8000 \
+                       --neg_strategy=zip \
+                       --neg_sample_num=5000 \
+                       --do_eval=False \
+                       --checkpointDir=xxx \
+                       --init_seed=1234 
 ```
 
 | Parameter                  | Description                                                                        |
@@ -130,11 +130,11 @@ python run_pretrain.py --bizdate=xxx
 #### Step 3: Output Representation
 
 ```sh
-python run_embed.py --bizdate=xxx 
-                    --init_checkpoint=xxx/xxx 
-                    --neg_strategy=zip
-                    --neg_sample_num=5000
-                    --do_eval=True
+python run_embed.py --bizdate=xxx \ 
+                    --init_checkpoint=xxx/xxx \ 
+                    --neg_strategy=zip \
+                    --neg_sample_num=5000 \
+                    --do_eval=True \
 ```
 
 ### Testing:
@@ -142,7 +142,7 @@ python run_embed.py --bizdate=xxx
 #### Phshing Account Detection
 ```sh
 cd BERT4ETH/Model;
-python run_dean.py --metric=euclidean
+python run_dean.py --metric=euclidean \
                    --algo=bert4eth
 ``` 
 
