@@ -104,25 +104,26 @@ python run_pretrain.py --bizdate=xxx
                        --neg_sample_num=5000
                        --do_eval=False
                        --checkpointDir=xxx
+                       --init_seed=1234
 ```
 
-| Parameter                  | Description                                                                               |
-|----------------------------|-------------------------------------------------------------------------------------------|
-| `bizdate`                  | The signature for this experiment run.                                                    |
-| `max_seq_length`           | The maximum length of BERT4ETH.                                                           |
-| `max_predictions_per_seq`  | The maximum number of masked addresses in one sequence.                                   |
-| `masked_lm_prob`           | The probability of masking an address.                                                    |
-| `epochs`                   | Number of local training epochs, default = `5`.                                           |
-| `batch_size`               | Batch size, default = `256`.                                                              |
-| `learning_rate`            | Learning rate for the local models, default = `1e-4`.                                     |
-| `num_train_steps`          | The maximum number of training steps, default = `1000000`,                                |
-| `num_warmup_steps`         | The step number for warm-up training, default = `100`.                                    |
-| `save_checkpoints_steps`   | The parameter controlling the step of saving checkpoints, default = `8000`.               |
-| `neg_strategy`             | Number of communication rounds to use, default = `50`.                                    |
-| `neg_sample_num`           | The negative sampling number for one batch, default = `5000`.                             |
-| `do_eval`                  | Whether do evaluation during training. Options (`uniform`, `zip`, `freq`), default `zip`. |
-| `checkpointDir`            | Specify the dirctory to save the checkpoints.                                             |
-| `init_seed`                | The initial seed, default = `0`.                                                          |
+| Parameter                  | Description                                                                        |
+|----------------------------|------------------------------------------------------------------------------------|
+| `bizdate`                  | The signature for this experiment run.                                             |
+| `max_seq_length`           | The maximum length of BERT4ETH.                                                    |
+| `max_predictions_per_seq`  | The maximum number of masked addresses in one sequence.                            |
+| `masked_lm_prob`           | The probability of masking an address.                                             |
+| `epochs`                   | Number of training epochs, default = `5`.                                          |
+| `batch_size`               | Batch size, default = `256`.                                                       |
+| `learning_rate`            | Learning rate for the optimizer (Adam), default = `1e-4`.                          |
+| `num_train_steps`          | The maximum number of training steps, default = `1000000`,                         |
+| `num_warmup_steps`         | The step number for warm-up training, default = `100`.                             |
+| `save_checkpoints_steps`   | The parameter controlling the step of saving checkpoints, default = `8000`.        |
+| `neg_strategy`             | Strategy for negative sampling, default `zip`, options (`uniform`, `zip`, `freq`). |
+| `neg_sample_num`           | The negative sampling number for one batch, default = `5000`.                      |
+| `do_eval`                  | Whether to do evaluation during training, default = `False`.                       |
+| `checkpointDir`            | Specify the directory to save the checkpoints.                                     |
+| `init_seed`                | The initial seed, default = `1234`.                                                |
 
 
 

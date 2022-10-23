@@ -72,6 +72,7 @@ flags.DEFINE_string("neg_strategy", "zip", "Strategy of negative sampling")
 flags.DEFINE_bool("use_tpu", False, "Whether to use TPU or GPU/CPU.")
 flags.DEFINE_string("data_dir", './data/', "data dir.")
 flags.DEFINE_string("bizdate", None, "the date of running experiments")
+flags.DEFINE_integer("init_seed", 1234 , "The initial seed")
 
 if FLAGS.bizdate is None:
     raise ValueError("bizdate is required..")
@@ -448,14 +449,14 @@ def get_masked_lm_output_negative_sampling(bert_config,
                                                         num_sampled=FLAGS.neg_sample_num,
                                                         unique=True,
                                                         range_max=word_num,
-                                                        seed=1234)
+                                                        seed=FLAGS.init_seed)
     elif FLAGS.neg_strategy == "zip":
         neg_ids, _, _ = tf.nn.log_uniform_candidate_sampler(true_classes=V,
                                                             num_true=1,
                                                             num_sampled=FLAGS.neg_sample_num,
                                                             unique=True,
                                                             range_max=word_num,
-                                                            seed=1234)
+                                                            seed=FLAGS.init_seed)
 
     elif FLAGS.neg_strategy == "freq":
         # negative sample based on frequency
@@ -466,7 +467,7 @@ def get_masked_lm_output_negative_sampling(bert_config,
                                                               range_max=word_num,
                                                               unigrams=list(
                                                                   map(lambda x: pow(x, 3 / 4), vocab.frequency[:-3])),
-                                                              seed=1234)
+                                                              seed=FLAGS.init_seed)
 
     else:
         raise ValueError("Please select correct negative sampling strategy: uniform, zip, .")
